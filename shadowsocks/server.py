@@ -86,6 +86,16 @@ def main():
             sys.exit(1)
         signal.signal(signal.SIGINT, int_handler)
 
+        pid = os.getpid();
+        logging.info("pid-file=%s,pid=%d", config['pid-file'], pid);
+        try:
+            with open(config['pid-file'], 'w') as f:
+                f.write(str(pid));
+                f.close();
+        except IOError:
+            logging.warn('error on write pid to pid-file..%s, %d', config['pid-file'], pid)
+            sys.exit(1)
+
         try:
             loop = eventloop.EventLoop()
             dns_resolver.add_to_loop(loop)
