@@ -361,7 +361,7 @@ class TCPRelayHandler(object):
             if self._config['verbose']:
                 traceback.print_exc()
             self.destroy()
-
+    # TODO-
     def _create_remote_socket(self, ip, port):
         addrs = socket.getaddrinfo(ip, port, 0, socket.SOCK_STREAM,
                                    socket.SOL_TCP)
